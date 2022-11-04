@@ -1,53 +1,124 @@
 class Country:
+#
+#     def __int__(self, name, continent, *args, **kwargs):
+#         self.name = name
+#         self.continent = continent
+#
+#     def return_name(self):
+#         return self.name, self.continent
+#
+#
+# class Brand:
+#     def __int__(self, brand_name, business_start_date, *args, **kwargs):
+#         self.br_name = brand_name
+#         self.start_date = business_start_date
+#
+#     def ret_(self):
+#         return self.br_name, self.start_date
+#
+#
+# class Season:
+#     def __init__(self, season_name,  average_temperature, *args, **kwargs):
+#
+#         self.s_name = season_name
+#         self.average_temp = average_temperature
+#
+#     def ret_(self):
+#         return self.s_name, self.average_temp
+#
+# class Product(Country, Brand, Season):
+#     def __init__(self, product_name, product_type, product_price, product_quantity, *args, **kwargs):
+#         self.p_name = product_name
+#         self.p_type = product_type
+#         self.p_price = product_price
+#         self.p_quantity = product_quantity
+#         print("args", args, "kwargs", kwargs)
+#         super().__init__(*args, **kwargs)
+#
+#     def product_price(self):
+#         percent = 30
+#         return self.p_price - self.p_price * percent / 100
+#
+#     def increase_the_quantity(self):
+#         return self.p_price + 1000
+#
+#     def decrease_the_quantity(self):
+#         return self.p_price - 1000
+#
+#
+# ret_name = Product("nikesh" , "shoos", 12000, 56, "smth", "USA", "Nike", 1980, "summer", 30)
+# print(Product.product_price(ret_name))
+# print(Product.increase_the_quantity(ret_name))
+# print(Product.decrease_the_quantity(ret_name))
+#
 
-    def __int__(self, name, continent, *args, **kwargs):
+
+class Hotel:
+    rooms_mid = {}
+    def __init__(self, name, attributes, place, rooms_mid, mid_room_price, rooms_lux, lux_room_price, *args, **kwargs):
         self.name = name
-        self.continent = continent
-
-    def return_name(self):
-        return self.name, self.continent
-
-
-class Brand:
-    def __int__(self, brand_name, business_start_date, *args, **kwargs):
-        self.br_name = brand_name
-        self.start_date = business_start_date
-
-    def ret_(self):
-        return self.br_name, self.start_date
-
-
-class Season:
-    def __init__(self, season_name,  average_temperature, *args, **kwargs):
-
-        self.s_name = season_name
-        self.average_temp = average_temperature
-
-    def ret_(self):
-        return self.s_name, self.average_temp
-
-class Product(Country, Brand, Season):
-    def __init__(self, product_name, product_type, product_price, product_quantity, *args, **kwargs):
-        self.p_name = product_name
-        self.p_type = product_type
-        self.p_price = product_price
-        self.p_quantity = product_quantity
-        print("args", args, "kwargs", kwargs)
+        self.attributes = attributes
+        self.place = place
+        self.rooms_m = rooms_mid
+        self.room_price = mid_room_price
+        self.rooms_lux = rooms_lux
+        self.lux_room_price = lux_room_price
         super().__init__(*args, **kwargs)
 
-    def product_price(self):
-        percent = 30
-        return self.p_price - self.p_price * percent / 100
-
-    def increase_the_quantity(self):
-        return self.p_price + 1000
-
-    def decrease_the_quantity(self):
-        return self.p_price - 1000
 
 
-ret_name = Product("nikesh" , "shoos", 12000, 56, "smth", "USA", "Nike", 1980, "summer", 30)
-print(Product.product_price(ret_name))
-print(Product.increase_the_quantity(ret_name))
-print(Product.decrease_the_quantity(ret_name))
+    def presentation(self):
+        return f"name is {self.name} , {self.attributes}, place is {self.place}, mid. room price is {self.room_price},\
+lux room price is {self.lux_room_price}"
+
+
+    def booking(self, room_choice):
+        if room_choice in self.rooms_m.keys():
+            if room_choice in self.rooms_lux.keys():
+                return f"{room_choice} is busy "
+
+
+    def available_room_check(self, room_type):
+        if room_type != "available":
+            room_type = "no available"
+        return room_type
+
+
+class Taxi:
+    def __init__(self, t_name, t_attributes, car_types, price_for_tour, *args, **kwargs):
+        self.t_name = t_name
+        self.t_attributes = t_attributes
+        self.car_type = car_types
+        self.price_for_tour = price_for_tour
+        super().__init__(*args, **kwargs)
+
+
+    def pres(self):
+        return f" name is {self.t_name}, attributes are {self.t_attributes}, car type is {self.car_type}, price for tour is {self.price_for_tour}"
+
+class Tour(Hotel,Taxi):
+    def __init__(self, name_, price_mid, price_lux, *args, **kwargs):
+        self.name_ = name_
+        self.price_mid = price_mid
+        self.price_lux = price_lux
+        super().__init__(*args, **kwargs)
+
+    def presentations(self):
+        return f" name of tour is {self.name_}, price mid is {self.price_mid}, price lux is {self.lux_room_price + self.price_for_tour}"
+
+
+    def present(self):
+        return f"Hello we offer {self.name_} tour we have two options {self.price_mid} and {self.price_lux}, which includes transport with {self.t_name} \n company which provides \
+    {self.car_type} car and price is {self.price_for_tour}. We will stay at {self.name} hotel ..."
+
+
+s = Hotel("red cross", "red", "center", {"room1": "free", "room2": "free", "room3": "free"}, 1500, {"room1": "free", "room2": "free", "room3": "free"}, 3000)
+taxi_ = Taxi("uber", "37rt536", "opel", 2400)
+tour = Tour("Geghard", 40000, 50000, "red cross", "red", "center", {"room1": "free", "room2": "free", "room3": "free"}, 1500, {"room1": "free", "room2": "free", "room3": "free"}, 3000, "uber", "37rt536", "opel", 2400)
+# print(Hotel.presentation(s))
+print(s.booking("room2"))
+print(s.available_room_check("no available"))
+# print(Taxi.pres(taxi_))
+print(Tour.present(tour))
+
 
