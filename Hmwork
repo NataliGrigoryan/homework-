@@ -1,0 +1,53 @@
+class Country:
+
+    def __int__(self, name, continent, *args, **kwargs):
+        self.name = name
+        self.continent = continent
+
+    def return_name(self):
+        return self.name, self.continent
+
+
+class Brand:
+    def __int__(self, brand_name, business_start_date, *args, **kwargs):
+        self.br_name = brand_name
+        self.start_date = business_start_date
+
+    def ret_(self):
+        return self.br_name, self.start_date
+
+
+class Season:
+    def __init__(self, season_name,  average_temperature, *args, **kwargs):
+
+        self.s_name = season_name
+        self.average_temp = average_temperature
+
+    def ret_(self):
+        return self.s_name, self.average_temp
+
+class Product(Country, Brand, Season):
+    def __init__(self, product_name, product_type, product_price, product_quantity, *args, **kwargs):
+        self.p_name = product_name
+        self.p_type = product_type
+        self.p_price = product_price
+        self.p_quantity = product_quantity
+        print("args", args, "kwargs", kwargs)
+        super().__init__(*args, **kwargs)
+
+    def product_price(self):
+        percent = 30
+        return self.p_price - self.p_price * percent / 100
+
+    def increase_the_quantity(self):
+        return self.p_price + 1000
+
+    def decrease_the_quantity(self):
+        return self.p_price - 1000
+
+
+ret_name = Product("nikesh" , "shoos", 12000, 56, "smth", "USA", "Nike", 1980, "summer", 30)
+print(Product.product_price(ret_name))
+print(Product.increase_the_quantity(ret_name))
+print(Product.decrease_the_quantity(ret_name))
+
